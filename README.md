@@ -28,3 +28,24 @@ Continue building your app on:
 2. Deploy your chats from the v0 interface
 3. Changes are automatically pushed to this repository
 4. Vercel deploys the latest version from this repository
+
+## Uso local (de 0 a 1)
+
+1. Instala las dependencias con `pnpm install` (o `npm install`).
+2. Inicia el servidor de desarrollo ejecutando `pnpm dev`.
+3. Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+4. Ingresa con las credenciales por defecto:
+   - **Usuario:** `admin`
+   - **Contraseña:** `s3gur0`
+
+## Navegación principal
+
+Después de iniciar sesión tendrás acceso a varias secciones dentro de `/dashboard`:
+
+- `/dashboard` — Panel principal con estadísticas generales.
+- `/dashboard/soldiers` — Gestión del personal militar.
+- `/dashboard/bases` — Información y listado de bases.
+- `/dashboard/statistics` — Gráficas y métricas del sistema.
+- `/dashboard/tactical` — Vista del mapa táctico.
+- `/dashboard/activity` — Registro de actividades recientes.
+

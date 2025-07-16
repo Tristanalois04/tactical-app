@@ -3,9 +3,8 @@
 import type React from "react"
 
 import { MantineProvider } from "@mantine/core"
-import { Notifications } from "@mantine/notifications"
+import { Toaster } from "@/components/ui/toaster"
 import "@mantine/core/styles.css"
-import "@mantine/notifications/styles.css"
 
 export default function RootLayout({
   children,
@@ -43,14 +42,11 @@ export default function RootLayout({
             },
           }}
         >
-          <Notifications />
           {children}
+          <Toaster />
         </MantineProvider>
       </body>
     </html>
   )
 }
 
-export const metadata = {
-      generator: 'v0.dev'
-    };

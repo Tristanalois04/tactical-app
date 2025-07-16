@@ -5,12 +5,22 @@ import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { IconShield } from "@tabler/icons-react"
-import { TextInput, PasswordInput, Paper, Title, Container, Button, Stack, Text, rem } from "@mantine/core"
-import { notifications } from "@mantine/notifications"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { useToast } from "@/hooks/use-toast"
 
 export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const { toast } = useToast()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -24,10 +34,10 @@ export function LoginForm() {
       document.cookie = "auth=true; path=/"
       router.push("/dashboard")
     } else {
-      notifications.show({
+      toast({
         title: "Authentication failed",
-        message: "Invalid username or password",
-        color: "red",
+        description: "Invalid username or password",
+        variant: "destructive",
       })
     }
 
@@ -35,29 +45,32 @@ export function LoginForm() {
   }
 
   return (
-    <Container size={420} my={40}>
-      <Paper radius="md" p="xl" withBorder>
-        <Stack align="center" mb="md">
-          <IconShield style={{ width: rem(32), height: rem(32) }} stroke={1.5} />
-          <Title order={2}>Military Command Center</Title>
-          <Text c="dimmed" size="sm" ta="center">
+    <div className="flex min-h-screen items-center justify-center p-4">
+      <Card className="w-full max-w-sm">
+        <CardHeader className="space-y-2 text-center">
+          <IconShield className="mx-auto h-8 w-8" stroke={1.5} />
+          <CardTitle>Military Command Center</CardTitle>
+          <CardDescription>
             Enter your credentials to access the system
-          </Text>
-        </Stack>
-
-        <form onSubmit={handleSubmit}>
-          <Stack>
-            <TextInput required label="Username" placeholder="Your username" name="username" radius="md" />
-
-            <PasswordInput required label="Password" placeholder="Your password" name="password" radius="md" />
-
-            <Button type="submit" radius="xl" loading={isLoading} fullWidth>
-              Sign in
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="username">Username</Label>
+              <Input id="username" name="username" placeholder="Your username" required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" name="password" type="password" placeholder="Your password" required />
+            </div>
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? "Signing in..." : "Sign in"}
             </Button>
-          </Stack>
-        </form>
-      </Paper>
-    </Container>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
 
